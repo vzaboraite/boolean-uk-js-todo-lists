@@ -32,10 +32,14 @@ for (let i = 0; i < users.length; i++) {
 alert(alertList);
 
 // Ask user to enter an ID
-const userIdString = prompt(`Who's todo list would you like to see? 
-${alertList}
-(Please enter an ID)
-`);
+let requestForId = `Who's todo list would you like to see?\n`;
+for (let i = 0; i < users.length; i++) {
+  const id = users[i].id;
+  const name = users[i].name;
+  // Update requestForId
+  requestForId += `ID: ${id} | ${name} \n`;
+}
+const userIdString = prompt(`${requestForId}\n(Please enter an ID)`);
 
 const userId = parseInt(userIdString);
 
