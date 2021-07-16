@@ -35,9 +35,9 @@ alert(alertList);
 let requestForId = `Who's todo list would you like to see?\n`;
 for (let i = 0; i < users.length; i++) {
   const id = users[i].id;
-  const name = users[i].name;
+  const username = users[i].username;
   // Update requestForId
-  requestForId += `ID: ${id} | ${name} \n`;
+  requestForId += `ID: ${id} | ${username} \n`;
 }
 const userIdString = prompt(`${requestForId}\n(Please enter an ID)`);
 
