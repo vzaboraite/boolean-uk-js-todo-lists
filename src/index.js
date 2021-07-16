@@ -71,9 +71,16 @@ const option = parseInt(optionString);
 if (option === 1) {
   alert(userTodoList);
 } else if (option === 2) {
+  let highiestId = 0;
+  for (let i = 0; i < todos.length; i++) {
+    const currentId = todos[i].id;
+    if (currentId >= highiestId) {
+      highiestId = currentId + 1;
+    }
+  }
   let todo = {};
   todo.userId = userId;
-  //   todo.id = todos[user].id + 1;
+  todo.id = highiestId;
   todo.title = prompt("What task do you need to do?");
   todo.completed = false;
   console.log(todo);
