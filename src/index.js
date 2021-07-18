@@ -114,10 +114,15 @@ for (let i = 0; i < selectedUserTodos.length; i++) {
 /* Challenge: Add options for user to select either from 
 reading current todo list or creating a new todo task*/
 
+/* Challenge2: Add options for user to select either to 
+delete or update todo task. */
+
 const optionString =
   prompt(`Hello ${selectedUser.username}!\n\nWhat would you like to do?
 1 - Read todo list
 2 - Create new task
+3 - Update task
+4 - Delete completed task
 (Please type a number)`);
 
 const selectedOption = parseInt(optionString);
