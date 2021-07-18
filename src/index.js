@@ -153,6 +153,56 @@ if (selectedOption === 1) {
   alert(
     `New task was added successfully:\nId: ${newTodoId} | ${newTodo.title}`
   );
+} else if (selectedOption === 3) {
+  /* For loop to set the prompt to display user todo list with task id and title,
+  that user could select*/
+  let userTodoListWithIdString = `What task would you like to uptade?\n\n`;
+
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    const userTodo = selectedUserTodos[i];
+    const id = userTodo.id;
+    const title = userTodo.title;
+
+    userTodoListWithIdString += `Id:${id} - ${title}\n`;
+  }
+
+  const taskIdToSelect = prompt(
+    `${userTodoListWithIdString}\n(Please enter task ID)`
+  );
+
+  const selectedTaskId = parseInt(taskIdToSelect);
+
+  /* For loop to get task to update */
+  let taskToUpdate = {};
+
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    const userTodo = selectedUserTodos[i];
+    const taskId = userTodo.id;
+
+    if (selectedTaskId === taskId) {
+      taskToUpdate = userTodo;
+    }
+  }
+
+  const updateOptions = prompt(`How would you like to update your task?\n
+  1 - Change title
+  2 - Toggle completion\n
+  (Please type a number)`);
+
+  const optionToUpdate = parseInt(updateOptions);
+  // const titleToChange = "";
+  // const completionToggle = null;
+  if (optionToUpdate === 1) {
+    taskToUpdate.title = prompt(`${taskToUpdate.title}\n\nChange todo title:`);
+    alert(
+      `Task title was changed successfully!\n\nUpdated title: ${taskToUpdate.title}`
+    );
+  } else if (optionToUpdate === 2) {
+    taskToUpdate.completed = !taskToUpdate.completed;
+    alert(
+      `Task completion was changed successfully!\n\nCompleted: ${taskToUpdate.completed}`
+    );
+  }
 }
 
 // --end--
