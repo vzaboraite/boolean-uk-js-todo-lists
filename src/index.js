@@ -111,6 +111,43 @@ for (let i = 0; i < selectedUserTodos.length; i++) {
   userTodosAlert += `--${selectedUserTodo.title}\n`;
 }
 
-alert(userTodosAlert);
+/* Challenge: Add options for user to select either from 
+reading current todo list or creating a new todo task*/
+
+const optionString =
+  prompt(`Hello ${selectedUser.username}!\n\nWhat would you like to do?
+1 - Read todo list
+2 - Create new task
+(Please type a number)`);
+
+const selectedOption = parseInt(optionString);
+
+if (selectedOption === 1) {
+  alert(userTodosAlert);
+} else if (selectedOption === 2) {
+  // For loop to set id for created new todo task
+  let newTodoId = 0;
+
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    // get userTodo object from selectedUserTodos[]
+    const userTodo = selectedUserTodos[i];
+    const currentTodoId = userTodo.id;
+    if (currentTodoId >= newTodoId) {
+      newTodoId = currentTodoId + 1;
+    }
+  }
+  // create new todo object
+  let newTodo = {};
+  newTodo.userId = selectedUserId;
+  newTodo.id = newTodoId;
+  newTodo.title = prompt(`Type in what task you want to add:\n`);
+  newTodo.completed = false;
+
+  /* Add new task to selectedUserTodos[] */
+  selectedUserTodos.push(newTodo);
+  alert(
+    `New task was added successfully:\nId: ${newTodoId} | ${newTodo.title}`
+  );
+}
 
 // --end--
