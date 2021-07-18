@@ -43,201 +43,212 @@ alert(alertUserList);
 
 // --end--
 
-// Second exercise part for prompt
+/* Challenge2: add option to repeat or finish the program */
+for (let programShouldWork = true; programShouldWork; ) {
+  // Second exercise part for prompt
 
-// --start--
+  // --start--
 
-// Loop to set prompt message
-let userInput = `Who's todo list would you like to see?\n`;
+  // Loop to set prompt message
+  let userInput = `Who's todo list would you like to see?\n\n`;
 
-for (let i = 0; i < users.length; i++) {
-  // get user object
-  const user = users[i];
+  for (let i = 0; i < users.length; i++) {
+    // get user object
+    const user = users[i];
 
-  // get user's id and username
-  const id = user.id;
-  const username = user.username;
+    // get user's id and username
+    const id = user.id;
+    const username = user.username;
 
-  // initialize row to display required user information for prompt
-  const row = `Id: ${id} | ${username}\n`;
-  // update userInput string
-  userInput += row;
-}
+    // initialize row to display required user information for prompt
+    const row = `Id: ${id} | ${username}\n`;
+    // update userInput string
+    userInput += row;
+  }
 
-let selectedUserId = parseInt(prompt(`${userInput}\n(Please enter an Id)`));
+  let selectedUserId = parseInt(prompt(`${userInput}\n(Please enter an Id)`));
 
-// --end--
+  // --end--
 
-// Third exercise part is to display an alert
+  // Third exercise part is to display an alert
 
-// --start--
+  // --start--
 
-// First loop is to set selectedUser object
-let selectedUser = {};
+  // First loop is to set selectedUser object
+  let selectedUser = {};
 
-for (let i = 0; i < users.length; i++) {
-  // get user object
-  const user = users[i];
+  for (let i = 0; i < users.length; i++) {
+    // get user object
+    const user = users[i];
 
-  /* if user id from original array is equal to selected id from prompt,
+    /* if user id from original array is equal to selected id from prompt,
    then update selectedUser object*/
-  if (user.id === selectedUserId) {
-    selectedUser = user;
+    if (user.id === selectedUserId) {
+      selectedUser = user;
+    }
   }
-}
 
-/* Second loop is for extracting the todos/tasks for selectedUser 
+  /* Second loop is for extracting the todos/tasks for selectedUser 
 and setting it to selectedUserTodos[] */
-const selectedUserTodos = [];
+  const selectedUserTodos = [];
 
-for (let i = 0; i < todos.length; i++) {
-  // get todo object
-  const todo = todos[i];
+  for (let i = 0; i < todos.length; i++) {
+    // get todo object
+    const todo = todos[i];
 
-  /* if selectedUserId is equal to userId in todos[], 
+    /* if selectedUserId is equal to userId in todos[], 
   then add selectedUser todo/task to selectedUserTodos[]. */
-  if (selectedUserId === todo.userId) {
-    selectedUserTodos.push(todo);
+    if (selectedUserId === todo.userId) {
+      selectedUserTodos.push(todo);
+    }
   }
-}
 
-// Third loop is to build alert with username and todos titles of that user
-let userTodosAlert = `${selectedUser.username}'s todo list:\n`;
+  // Third loop is to build alert with username and todos titles of that user
+  let userTodosAlert = `${selectedUser.username}'s todo list:\n`;
 
-for (let i = 0; i < selectedUserTodos.length; i++) {
-  // get selectedUserTodo object
-  const selectedUserTodo = selectedUserTodos[i];
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    // get selectedUserTodo object
+    const selectedUserTodo = selectedUserTodos[i];
 
-  userTodosAlert += `--${selectedUserTodo.title}\n`;
-}
+    userTodosAlert += `--${selectedUserTodo.title}\n`;
+  }
 
-/* Challenge: Add options for user to select either from 
+  /* Challenge: Add options for user to select either from 
 reading current todo list or creating a new todo task*/
 
-/* Challenge2: Add options for user to select either to 
+  /* Challenge2: Add options for user to select either to 
 delete or update todo task. */
 
-const optionString =
-  prompt(`Hello ${selectedUser.username}!\n\nWhat would you like to do?
+  const optionString =
+    prompt(`Hello ${selectedUser.username}!\n\nWhat would you like to do?
 1 - Read todo list
 2 - Create new task
 3 - Update task
 4 - Delete completed task
 (Please type a number)`);
 
-const selectedOption = parseInt(optionString);
+  const selectedOption = parseInt(optionString);
 
-if (selectedOption === 1) {
-  alert(userTodosAlert);
-} else if (selectedOption === 2) {
-  // For loop to set id for created new todo task
-  let newTodoId = 0;
+  if (selectedOption === 1) {
+    alert(userTodosAlert);
+  } else if (selectedOption === 2) {
+    // For loop to set id for created new todo task
+    let newTodoId = 0;
 
-  for (let i = 0; i < selectedUserTodos.length; i++) {
-    // get userTodo object from selectedUserTodos[]
-    const userTodo = selectedUserTodos[i];
-    const currentTodoId = userTodo.id;
-    if (currentTodoId >= newTodoId) {
-      newTodoId = currentTodoId + 1;
+    for (let i = 0; i < selectedUserTodos.length; i++) {
+      // get userTodo object from selectedUserTodos[]
+      const userTodo = selectedUserTodos[i];
+      const currentTodoId = userTodo.id;
+      if (currentTodoId >= newTodoId) {
+        newTodoId = currentTodoId + 1;
+      }
     }
-  }
-  // create new todo object
-  let newTodo = {};
-  newTodo.userId = selectedUserId;
-  newTodo.id = newTodoId;
-  newTodo.title = prompt(`Type in what task you want to add:\n`);
-  newTodo.completed = false;
+    // create new todo object
+    let newTodo = {};
+    newTodo.userId = selectedUserId;
+    newTodo.id = newTodoId;
+    newTodo.title = prompt(`Type in what task you want to add:\n`);
+    newTodo.completed = false;
 
-  /* Add new task to selectedUserTodos[] */
-  selectedUserTodos.push(newTodo);
-  alert(
-    `New task was added successfully:\nId: ${newTodoId} | ${newTodo.title}`
-  );
-} else if (selectedOption === 3) {
-  /* For loop to set the prompt to display user todo list with task id and title,
+    /* Add new task to selectedUserTodos[] */
+    selectedUserTodos.push(newTodo);
+    alert(
+      `New task was added successfully:\nId: ${newTodoId} | ${newTodo.title}`
+    );
+  } else if (selectedOption === 3) {
+    /* For loop to set the prompt to display user todo list with task id and title,
   that user could select*/
-  let userTodoListWithIdString = `What task would you like to uptade?\n\n`;
+    let userTodoListWithIdString = `What task would you like to uptade?\n\n`;
 
-  for (let i = 0; i < selectedUserTodos.length; i++) {
-    const userTodo = selectedUserTodos[i];
-    const id = userTodo.id;
-    const title = userTodo.title;
+    for (let i = 0; i < selectedUserTodos.length; i++) {
+      const userTodo = selectedUserTodos[i];
+      const id = userTodo.id;
+      const title = userTodo.title;
 
-    userTodoListWithIdString += `Id:${id} - ${title}\n`;
-  }
-
-  const taskIdToSelect = prompt(
-    `${userTodoListWithIdString}\n(Please enter task ID)`
-  );
-
-  const selectedTaskId = parseInt(taskIdToSelect);
-
-  /* For loop to get task to update */
-  let taskToUpdate = {};
-
-  for (let i = 0; i < selectedUserTodos.length; i++) {
-    const userTodo = selectedUserTodos[i];
-    const taskId = userTodo.id;
-
-    if (selectedTaskId === taskId) {
-      taskToUpdate = userTodo;
+      userTodoListWithIdString += `Id:${id} - ${title}\n`;
     }
-  }
 
-  const updateOptions = prompt(`How would you like to update your task?\n
+    const taskIdToSelect = prompt(
+      `${userTodoListWithIdString}\n(Please enter task ID)`
+    );
+
+    const selectedTaskId = parseInt(taskIdToSelect);
+
+    /* For loop to get task to update */
+    let taskToUpdate = {};
+
+    for (let i = 0; i < selectedUserTodos.length; i++) {
+      const userTodo = selectedUserTodos[i];
+      const taskId = userTodo.id;
+
+      if (selectedTaskId === taskId) {
+        taskToUpdate = userTodo;
+      }
+    }
+
+    const updateOptions = prompt(`How would you like to update your task?\n
   1 - Change title
   2 - Toggle completion\n
   (Please type a number)`);
 
-  const optionToUpdate = parseInt(updateOptions);
-  // const titleToChange = "";
-  // const completionToggle = null;
-  if (optionToUpdate === 1) {
-    taskToUpdate.title = prompt(`${taskToUpdate.title}\n\nChange todo title:`);
-    alert(
-      `Task title was changed successfully!\n\nUpdated title: ${taskToUpdate.title}`
-    );
-  } else if (optionToUpdate === 2) {
-    taskToUpdate.completed = !taskToUpdate.completed;
-    alert(
-      `Task completion was changed successfully!\n\nCompleted: ${taskToUpdate.completed}`
-    );
-  }
-} else if (selectedOption === 4) {
-  // For loop to get task id of todo that user wants to delete
-  let deleteOptions = `Which completed task would you like to delete?\n\n`;
-
-  for (let i = 0; i < selectedUserTodos.length; i++) {
-    // get user todo object
-    const userTodo = selectedUserTodos[i];
-    const id = userTodo.id;
-    const title = userTodo.title;
-    const completed = userTodo.completed;
-
-    if (completed === true) {
-      deleteOptions += `Id:${id} - ${title} | Completed: ${completed}\n`;
-    }
-  }
-
-  const optionToDelete = parseInt(
-    prompt(`${deleteOptions}\n\n(Please select an Id)`)
-  );
-
-  /* For loop to get task to delete */
-  let deletedTask = null;
-
-  for (let i = 0; i < selectedUserTodos.length; i++) {
-    const userTodo = selectedUserTodos[i];
-    const title = userTodo.title;
-    const taskId = userTodo.id;
-
-    if (optionToDelete === taskId) {
-      deletedTask = selectedUserTodos.splice(i, 1);
+    const optionToUpdate = parseInt(updateOptions);
+    // const titleToChange = "";
+    // const completionToggle = null;
+    if (optionToUpdate === 1) {
+      taskToUpdate.title = prompt(
+        `${taskToUpdate.title}\n\nChange todo title:`
+      );
       alert(
-        `Task deleted successfully!\n\nDeleted task:\nId: ${taskId} | ${title}`
+        `Task title was changed successfully!\n\nUpdated title: ${taskToUpdate.title}`
+      );
+    } else if (optionToUpdate === 2) {
+      taskToUpdate.completed = !taskToUpdate.completed;
+      alert(
+        `Task completion was changed successfully!\n\nCompleted: ${taskToUpdate.completed}`
       );
     }
+  } else if (selectedOption === 4) {
+    // For loop to get task id of todo that user wants to delete
+    let deleteOptions = `Which completed task would you like to delete?\n\n`;
+
+    for (let i = 0; i < selectedUserTodos.length; i++) {
+      // get user todo object
+      const userTodo = selectedUserTodos[i];
+      const id = userTodo.id;
+      const title = userTodo.title;
+      const completed = userTodo.completed;
+
+      if (completed === true) {
+        deleteOptions += `Id:${id} - ${title} | Completed: ${completed}\n`;
+      }
+    }
+
+    const optionToDelete = parseInt(
+      prompt(`${deleteOptions}\n\n(Please select an Id)`)
+    );
+
+    /* For loop to get task to delete */
+    let deletedTask = null;
+
+    for (let i = 0; i < todos.length; i++) {
+      const userTodo = todos[i];
+      const title = userTodo.title;
+      const taskId = userTodo.id;
+
+      if (optionToDelete === taskId) {
+        deletedTask = todos.splice(i, 1);
+        alert(
+          `Task deleted successfully!\n\nDeleted task:\nId: ${taskId} | ${title}`
+        );
+      }
+    }
+  }
+
+  // --end--
+
+  programShouldWork = confirm(`Would you like to start over?`);
+
+  if (programShouldWork === false) {
+    alert(`Program finished work.\n\n--Hasta la vista, user!--`);
   }
 }
-
-// --end--
