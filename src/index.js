@@ -203,6 +203,41 @@ if (selectedOption === 1) {
       `Task completion was changed successfully!\n\nCompleted: ${taskToUpdate.completed}`
     );
   }
+} else if (selectedOption === 4) {
+  // For loop to get task id of todo that user wants to delete
+  let deleteOptions = `Which completed task would you like to delete?\n\n`;
+
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    // get user todo object
+    const userTodo = selectedUserTodos[i];
+    const id = userTodo.id;
+    const title = userTodo.title;
+    const completed = userTodo.completed;
+
+    if (completed === true) {
+      deleteOptions += `Id:${id} - ${title} | Completed: ${completed}\n`;
+    }
+  }
+
+  const optionToDelete = parseInt(
+    prompt(`${deleteOptions}\n\n(Please select an Id)`)
+  );
+
+  /* For loop to get task to delete */
+  let deletedTask = null;
+
+  for (let i = 0; i < selectedUserTodos.length; i++) {
+    const userTodo = selectedUserTodos[i];
+    const title = userTodo.title;
+    const taskId = userTodo.id;
+
+    if (optionToDelete === taskId) {
+      deletedTask = selectedUserTodos.splice(i, 1);
+      alert(
+        `Task deleted successfully!\n\nDeleted task:\nId: ${taskId} | ${title}`
+      );
+    }
+  }
 }
 
 // --end--
