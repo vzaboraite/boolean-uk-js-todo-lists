@@ -135,9 +135,9 @@ delete or update todo task. */
     // For loop to set id for created new todo task
     let newTodoId = 0;
 
-    for (let i = 0; i < selectedUserTodos.length; i++) {
-      // get userTodo object from selectedUserTodos[]
-      const userTodo = selectedUserTodos[i];
+    for (let i = 0; i < todos.length; i++) {
+      // get userTodo object from todos[]
+      const userTodoFromTodos = todos[i];
       const currentTodoId = userTodo.id;
       if (currentTodoId >= newTodoId) {
         newTodoId = currentTodoId + 1;
@@ -150,8 +150,8 @@ delete or update todo task. */
     newTodo.title = prompt(`Type in what task you want to add:\n`);
     newTodo.completed = false;
 
-    /* Add new task to selectedUserTodos[] */
-    selectedUserTodos.push(newTodo);
+    /* Add new task to todos[] */
+    todos.push(newTodo);
     alert(
       `New task was added successfully:\nId: ${newTodoId} | ${newTodo.title}`
     );
@@ -231,9 +231,9 @@ delete or update todo task. */
     let deletedTask = null;
 
     for (let i = 0; i < todos.length; i++) {
-      const userTodo = todos[i];
-      const title = userTodo.title;
-      const taskId = userTodo.id;
+      const userTodoFromTodos = todos[i];
+      const title = userTodoFromTodos.title;
+      const taskId = userTodoFromTodos.id;
 
       if (optionToDelete === taskId) {
         deletedTask = todos.splice(i, 1);
